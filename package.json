@@ -4,15 +4,16 @@
   "description": "DataProvider for Refine with Sanity",
   "type": "module",
   "author": "Hiren F",
-  "types": "index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
   "peerDependencies": {
-    "@refinedev/core": "^4.28.2"
+    "@refinedev/core": "^4.28.2",
+    "@sanity/client": "^6.4.12"
   },
   "devDependencies": {
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@sanity/client": "^6.4.12"
+    "groqd": "^0.15.9"
   }
 }
