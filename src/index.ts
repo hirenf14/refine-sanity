@@ -7,6 +7,7 @@ import {
   import { q } from 'groqd';
 import { generateFilter } from "./utils/generateFilter";
 import { generateSelect } from "./utils/generateSelect";
+import { generateSort } from "./utils/generateSort";
   
 // @ts-ignore   
 class SanityDataProvider<T> implements DataProvider<T> {
@@ -24,8 +25,10 @@ class SanityDataProvider<T> implements DataProvider<T> {
         if(filterStr) {
           dataQuery.filter(filterStr); // Apply filters if any result's achieved
         }
-
         const totalQuery = dataQuery.query; // Separate query to avoid sliced total
+        if(sorters) {
+          dataQuery.order(...generateSort(sorters));
+        }
         dataQuery.slice(start, end);
         const paginatedQuery = q(`{
           "data": ${dataQuery.query}${generateSelect(meta?.fields)},
