@@ -31,7 +31,7 @@ export const generateFilter = (filters?: CrudFilters) => {
         const { field, operator, value } = filter;
         const mappedOperator = mapOperator(operator);
         const isNegative = negativeFilters.includes(operator);
-        const filterStr = `${field} ${mappedOperator} '${value}'`;
+        const filterStr = `${field} ${mappedOperator} "${value}"`;
         return isNegative ? `!(${filterStr})` : filterStr;
     }
     return undefined;
