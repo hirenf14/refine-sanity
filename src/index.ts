@@ -55,17 +55,16 @@ export const dataProvider = (client: SanityClient): DataProvider => {
     getApiUrl(): string {
       throw Error("Not implemented on refine-sanity data provider.");
     },
-    async create({ resource, variables, ...rest }: Parameters<DataProvider['create']>[0]) {
-      if (variables) {
-        console.log(variables, rest);
-        throw Error("WIP");
-      }
+    async create({ resource, variables }: Parameters<DataProvider['create']>[0]) {
       const response = await client.create({
         _type: resource,
-        variables
+        ...(variables as any)
       });
       return {
-        data: response as any
+        data: {
+          ...response,
+          id: response._id
+        } as any
       }
     },
 
