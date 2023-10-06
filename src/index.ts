@@ -38,7 +38,18 @@ export const dataProvider = (client: SanityClient): DataProvider => {
           data: response.data,
           total: response.total
         };
+
+    getApiUrl(): string {
+      throw Error("Not implemented on refine-sanity data provider.");
+    },
+
+    async update(): Promise<any> {
+      throw Error("WIP");
+    },
+
+    async deleteOne(): Promise<any> {
+      throw Error("WIP");
     }
   };
 }
-export default SanityDataProvider;
+export default dataProvider;
