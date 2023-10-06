@@ -38,6 +38,19 @@ export const dataProvider = (client: SanityClient): DataProvider => {
           data: response.data,
           total: response.total
         };
+    },
+
+    async getOne({ resource, id, meta }: Parameters<DataProvider['getOne']>[0]) {
+      const { query } = q("*").filterByType(resource).filter(`_id == "${id}"`).slice(0);
+      const dataQuery = q(`{
+      "data": ${query}${generateSelect(meta?.fields)}
+    }`);
+      // const data = await client.getDocument(id as string);
+      const response = await client.fetch(dataQuery.query);
+      return {
+        data: response.data
+      }
+    },
 
     getApiUrl(): string {
       throw Error("Not implemented on refine-sanity data provider.");
