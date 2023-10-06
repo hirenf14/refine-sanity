@@ -68,8 +68,18 @@ export const dataProvider = (client: SanityClient): DataProvider => {
       }
     },
 
-    async update(): Promise<any> {
-      throw Error("WIP");
+    async update({ resource, id, variables }: Parameters<DataProvider['update']>[0]) {
+      const response = await client.createOrReplace({
+        _type: resource,
+        _id: id,
+        ...(variables as any)
+      });
+      return {
+        data: {
+          ...response,
+          id: response._id
+        } as any
+      }
     },
 
     async deleteOne(): Promise<any> {
