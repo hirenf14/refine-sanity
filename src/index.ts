@@ -20,16 +20,16 @@ class SanityDataProvider<T> implements DataProvider<T> {
           } = pagination ?? {};
           const start = (current - 1) * pageSize;
           const end = start + pageSize - 1;
-        const dataQuery = q("*").filterByType(resource);
+      let dataQuery: any = q("*").filterByType(resource);
         const filterStr = generateFilter(filters);
-        if(filterStr) {
-          dataQuery.filter(filterStr); // Apply filters if any result's achieved
+      if (filterStr) {
+        dataQuery = dataQuery.filter(filterStr); // Apply filters if any result's achieved
         }
         const totalQuery = dataQuery.query; // Separate query to avoid sliced total
-        if(sorters) {
-          dataQuery.order(...generateSort(sorters));
+      if (sorters?.length) {
+        dataQuery = dataQuery.order(...generateSort(sorters));
         }
-        dataQuery.slice(start, end);
+      dataQuery = dataQuery.slice(start, end);
         const paginatedQuery = q(`{
           "data": ${dataQuery.query}${generateSelect(meta?.fields)},
           "total": count(${totalQuery}._id)
