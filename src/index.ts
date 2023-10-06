@@ -9,10 +9,9 @@ import { generateFilter } from "./utils/generateFilter";
 import { generateSelect } from "./utils/generateSelect";
 import { generateSort } from "./utils/generateSort";
   
-// @ts-ignore   
-class SanityDataProvider<T> implements DataProvider<T> {
-    constructor(private client: SanityClient) {
-    }
+
+export const dataProvider = (client: SanityClient): DataProvider => {
+  return {
     async getList({ resource, pagination, sorters, filters, meta }: Parameters<DataProvider['getList']>[0]) {
         const {
             current = 1,
@@ -40,8 +39,6 @@ class SanityDataProvider<T> implements DataProvider<T> {
           total: response.total
         };
     }
-
-
+  };
 }
-
 export default SanityDataProvider;
