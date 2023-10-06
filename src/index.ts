@@ -82,8 +82,11 @@ export const dataProvider = (client: SanityClient): DataProvider => {
       }
     },
 
-    async deleteOne(): Promise<any> {
-      throw Error("WIP");
+    async deleteOne({ id }: Parameters<DataProvider['deleteOne']>[0]) {
+      const response = await client.delete(id as string);
+      return {
+        data: response as any
+      }
     }
   };
 }
