@@ -33,7 +33,7 @@ export const dataProvider = (client: SanityClient): DataProvider => {
           "data": ${dataQuery.query}${generateSelect(meta?.fields)},
           "total": count(${totalQuery}._id)
         }`);
-        const response = await this.client.fetch(paginatedQuery.query);
+      const response = await client.fetch(paginatedQuery.query);
         return {
           data: response.data,
           total: response.total
