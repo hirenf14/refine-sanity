@@ -1,11 +1,31 @@
 {
   "name": "refine-sanity",
   "version": "1.0.0",
-  "description": "DataProvider for Refine with Sanity",
+  "description": "Data provider for refine with sanity. refine is a React-based framework for building internal tools, rapidly. Sanity is headless CMS.",
   "type": "module",
-  "author": "Hiren F",
+  "author": {
+    "name" : "Hiren F",
+    "email" : "hirenf14@gmail.com",
+    "url" : "https://github.com/hirenf14"
+  },
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
+  "homepage": "https://github.com/hirenf14/refine-sanity#readme",
+  "private": false,
+  "keywords": [
+    "refine",
+    "refinedev",
+    "sanity",
+    "data provider",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hirenf14/refine-sanity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hirenf14/refine-sanity/issues"
+  },
   "peerDependencies": {
     "@refinedev/core": "^4.28.2",
     "@sanity/client": "^6.4.12"
