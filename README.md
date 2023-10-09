@@ -1,10 +1,10 @@
 # refine-sanity
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![NPM Version](https://img.shields.io/npm/v/refine-sanity.svg)](https://www.npmjs.com/package/refine-sanity)
 [![NPM Downloads](https://img.shields.io/npm/dt/refine-sanity.svg)](https://www.npmjs.com/package/refine-sanity)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-![GitHub issues](https://img.shields.io/github/issues-raw/hirenf14/refine-sanity)
 ![GitHub Repo stars](https://img.shields.io/github/stars/hirenf14/refine-sanity)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/hirenf14/refine-sanity)
 
 
 ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/refine-sanity/peer/%40refinedev%2Fcore)
