@@ -1,5 +1,14 @@
 # refine-sanity
 
+[![Build](https://github.com/hirenf14/refine-sanity/actions/workflows/nodejs.yml/badge.svg)](https://github.com/hirenf14/refine-sanity/actions/workflows/nodejs.yml)
+[![NPM Version](https://img.shields.io/npm/v/refine-sanity.svg)](https://www.npmjs.com/package/refine-sanity)
+[![NPM Downloads](https://img.shields.io/npm/dt/refine-sanity.svg)](https://www.npmjs.com/package/refine-sanity)
+[![Github Repo Size](https://img.shields.io/github/repo-size/hirenf14/refine-sanity.svg)](https://github.com/hirenf14/refine-sanity)
+[![LICENSE](https://img.shields.io/npm/l/refine-sanity.svg)](https://github.com/hirenf14/refine-sanity/blob/master/LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/hirenf14/refine-sanity.svg)](https://github.com/hirenf14/refine-sanity/graphs/contributors)
+[![Commit](https://img.shields.io/github/last-commit/hirenf14/refine-sanity.svg)](https://github.com/hirenf14/refine-sanity/commits/master)
+
+
 [![npm version](https://badge.fury.io/js/refine-sanity.svg)](https://badge.fury.io/js/refine-sanity)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
