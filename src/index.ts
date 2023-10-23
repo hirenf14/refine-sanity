@@ -91,6 +91,19 @@ export const dataProvider = (client: SanityClient): DataProvider => {
         data: response as any
       }
     },
+
+    async deleteMany({ ids, resource, meta }) {
+      const idsStr = ids.map((id) => `"${id}"`).join(", ");
+      const { query } = q(
+          `*[_id in [${idsStr}]]${generateSelect(meta?.fields)}`,
+      ).filterByType(resource);
+
+      const response = await client.delete({ query });
+
+      return {
+          data: response as any,
+      }
+    },
     
     getApiUrl(): string {
       throw Error("Not implemented on refine-sanity data provider.");
