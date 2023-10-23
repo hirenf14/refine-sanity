@@ -26,16 +26,24 @@ const mapOperator = (operator: CrudOperators) => {
 }
 const negativeFilters = ["nin", "ncontains"];
 export const generateFilter = (filters?: CrudFilters) => {
-    const queryFilters = filters?.map((filter) => {
-    if ("field" in filter) {
-        const { field, operator, value } = filter;
-        const mappedOperator = mapOperator(operator);
-        const isNegative = negativeFilters.includes(operator);
-        const filterStr = `${field} ${mappedOperator} "${value}"`;
-        return isNegative ? `!(${filterStr})` : filterStr;
-    }
-    return undefined;
-    }).filter(v => v);
-
+    const queryFilters = filters
+      ?.map((filter) => {
+        if (Array.isArray(filter?.value) && filter.value?.length === 0) {
+          return undefined;
+        }
+  
+        if ("field" in filter) {
+          const { field, operator, value } = filter;
+          const mappedOperator = mapOperator(operator);
+          const isNegative = negativeFilters.includes(operator);
+          const filterStr = `${field} ${mappedOperator} "${value}"`;
+  
+          return isNegative ? `!(${filterStr})` : filterStr;
+        }
+        return undefined;
+      })
+      .filter((v) => v);
+  
     return queryFilters?.join(" && ");
-};
+  };
+  
