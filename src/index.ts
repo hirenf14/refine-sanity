@@ -52,13 +52,14 @@ export const dataProvider = (client: SanityClient): DataProvider => {
       }
     },
 
-    getApiUrl(): string {
-      throw Error("Not implemented on refine-sanity data provider.");
-    },
     async create({ resource, variables }: Parameters<DataProvider['create']>[0]) {
-      const response = await client.create({
+      const response = await client.create(
+      {
         _type: resource,
         ...(variables as any)
+      },
+      {
+        autoGenerateArrayKeys: true
       });
       return {
         data: {
@@ -68,17 +69,19 @@ export const dataProvider = (client: SanityClient): DataProvider => {
       }
     },
 
-    async update({ resource, id, variables }: Parameters<DataProvider['update']>[0]) {
-      const response = await client.createOrReplace({
-        _type: resource,
-        _id: id,
-        ...(variables as any)
-      });
+    async update({ id, variables }: Parameters<DataProvider['update']>[0]) {
+      const response = await client
+        .patch(id as string)
+        .set({
+          _id: id,
+          ...(variables as any),
+        })
+        .commit({ autoGenerateArrayKeys: true });
       return {
         data: {
           ...response,
-          id: response._id
-        } as any
+          id: response._id,
+        } as any,
       }
     },
 
@@ -87,7 +90,11 @@ export const dataProvider = (client: SanityClient): DataProvider => {
       return {
         data: response as any
       }
-    }
+    },
+    
+    getApiUrl(): string {
+      throw Error("Not implemented on refine-sanity data provider.");
+    },
   };
 }
 export default dataProvider;
