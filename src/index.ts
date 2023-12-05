@@ -1,13 +1,14 @@
 import { SanityClient } from "@sanity/client";
 
 import {
-  DataProvider,
+  DataProvider, LiveProvider,
 } from "@refinedev/core";
 
 import { q } from 'groqd';
 import { generateFilter } from "./utils/generateFilter";
 import { generateSelect } from "./utils/generateSelect";
 import { generateSort } from "./utils/generateSort";
+import { liveTypes } from "./utils/liveTypes";
 
 
 export const dataProvider = (client: SanityClient): DataProvider => {
@@ -111,3 +112,34 @@ export const dataProvider = (client: SanityClient): DataProvider => {
   };
 }
 export default dataProvider;
+
+export const liveProvider = (client: SanityClient): LiveProvider => {
+  return {
+    subscribe({ callback, params, channel }) {
+      const subscription = client.listen(`*[_type == '${params?.resource}']`).subscribe((event) => {
+        if (event?.identity === '<system>') {
+          return
+        }
+        if (event?.documentId.includes('drafts.')) {
+          return
+        }
+
+        // Sanity sends WS events before the document is actually updated
+        // so we need to wait a bit before calling the callback
+        setTimeout(() => {
+          callback({
+            channel,
+            type: liveTypes[event.type],
+            date: new Date(event.timestamp),
+            payload: event,
+          })
+        }, 1000)
+      })
+
+      return () => subscription.unsubscribe()
+    },
+    unsubscribe(unsubscribe) {
+      unsubscribe()
+    },
+  }
+}

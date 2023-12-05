@@ -1,6 +1,6 @@
 {
   "name": "refine-sanity",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Data provider for refine with sanity. refine is a React-based framework for building internal tools, rapidly. Sanity is headless CMS.",
   "type": "module",
   "author": {
